@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db.models import Avg
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
+
 from reviews.models import Categories, Comments, Genres, Review, Title, User
 
 

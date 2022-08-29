@@ -1,36 +1,22 @@
-from api.filters import TitleFilter
-from api.mixins import ListCreateDestroyViewSet
-from api.permissions import (
-    IsAdminOrReadOnly,
-    IsAdminOrSuperUser,
-    IsAuthorOrReadOnly,
-)
-from api.serializers import (
-    CategorySerialiser,
-    CommentSerializer,
-    FullUserSerializer,
-    GenreSerialiser,
-    ReadOnlyTitleSerializer,
-    ReviewSerializer,
-    TitleSerialiser,
-    UserEmailCodeSerializer,
-    UserSerializer,
-)
-from api.utils import email_code, send_email
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import (
-    filters,
-    mixins,
-    pagination,
-    permissions,
-    status,
-    viewsets,
-)
+from rest_framework import (filters, mixins, pagination, permissions, status,
+                            viewsets)
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import AccessToken
+
+from api.filters import TitleFilter
+from api.mixins import ListCreateDestroyViewSet
+from api.permissions import (IsAdminOrReadOnly, IsAdminOrSuperUser,
+                             IsAuthorOrReadOnly)
+from api.serializers import (CategorySerialiser, CommentSerializer,
+                             FullUserSerializer, GenreSerialiser,
+                             ReadOnlyTitleSerializer, ReviewSerializer,
+                             TitleSerialiser, UserEmailCodeSerializer,
+                             UserSerializer)
+from api.utils import email_code, send_email
 from reviews.models import Categories, Genres, Title, User
 
 
