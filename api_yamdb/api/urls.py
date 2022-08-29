@@ -7,7 +7,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register('users', AdminUserViewSet, basename='admin_user')
 router.register('titles', TitleViewSet)
-router.register('genres_test', GenreViewSet)
+router.register('genresgenres', GenreViewSet)
 router.register('categories', CategoryViewSet)
 router.register(
     r'titles/(?P<title_id>\d+)/reviews',
