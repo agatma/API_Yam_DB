@@ -1,4 +1,3 @@
-# .github/workflows/**main.yml**
 name: yamdb-final-app workflow
 
 on: [push]
@@ -25,6 +24,7 @@ jobs:
     - name: Tests with pytest
       run: pytest
   build_and_push_to_docker_hub:
+    if: github.ref == 'refs/heads/master'
     name: Push docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: tests
@@ -45,6 +45,7 @@ jobs:
           push: True
           tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
   deploy:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
