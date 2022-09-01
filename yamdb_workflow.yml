@@ -1,4 +1,3 @@
-# .github/workflows/**main.yml**
 name: yamdb-final-app workflow
 
 on: [push]
@@ -16,13 +15,16 @@ jobs:
         python -m pip install --upgrade pip 
         pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
         pip install -r api_yamdb/requirements.txt
-    - name: Test with flake 8 and django tests
+    - name: Tests with Flake 8
+      run: python -m flake8
+    - name: Tests with django
       run: |
-        python -m flake8
         cd api_yamdb/
         python manage.py test
-        # добавить pytest
+    - name: Tests with pytest
+      run: pytest
   build_and_push_to_docker_hub:
+    if: github.ref == 'refs/heads/master'
     name: Push docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: tests
@@ -43,6 +45,7 @@ jobs:
           push: True
           tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
   deploy:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
@@ -74,8 +77,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ github.workflow }} успешно выполнен!
-
-
-
-        
-
